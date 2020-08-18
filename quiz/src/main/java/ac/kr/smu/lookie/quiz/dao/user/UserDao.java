@@ -20,6 +20,7 @@ import java.util.Map;
 public class UserDao {
     private final NamedParameterJdbcTemplate jdbc;
     private final RowMapper<User> userRowMapper = BeanPropertyRowMapper.newInstance(User.class);
+
     private final SimpleJdbcInsert insertAction;
 
     public UserDao(DataSource dataSource){
@@ -37,7 +38,6 @@ public class UserDao {
     }
 
     public int insertUser(User user){
-        user.setQuizCreate(0);
         SqlParameterSource param = new BeanPropertySqlParameterSource(user);
 
         return insertAction.executeAndReturnKey(param).intValue();
