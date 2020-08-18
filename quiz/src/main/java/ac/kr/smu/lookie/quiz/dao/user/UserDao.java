@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 @Repository
@@ -40,5 +41,22 @@ public class UserDao {
         SqlParameterSource param = new BeanPropertySqlParameterSource(user);
 
         return insertAction.executeAndReturnKey(param).intValue();
+    }
+
+    public int updateNickname(String nickname, String newNickname){
+        Map<String, String> param = new HashMap<>();
+        param.put("nickname", nickname);
+        param.put("newNickname", newNickname);
+
+        int updateCount = jdbc.update(UserDaoSqls.UPDATE_NICKNAME, param);
+        return updateCount;
+    }
+
+    public int deleteUserByNickname(String nickname){
+        Map<String, String> param = new HashMap<>();
+        param.put("nickname", nickname);
+
+        int deleteCount = jdbc.update(UserDaoSqls.DELETE_USER, param);
+        return deleteCount;
     }
 }

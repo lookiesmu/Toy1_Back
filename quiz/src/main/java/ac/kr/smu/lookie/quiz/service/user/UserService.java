@@ -6,4 +6,6 @@ import ac.kr.smu.lookie.quiz.dto.user.User;
 public interface UserService extends UserDbService {
     public Boolean isValidNickName(String nickname);
     public int insertUser(User user);
+    public int deleteUserByNickname(String nickname);
+    public int updateNickname(String nickname, String newNickname);
 }

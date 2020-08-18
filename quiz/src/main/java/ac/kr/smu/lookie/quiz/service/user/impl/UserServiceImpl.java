@@ -46,7 +46,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public int insertUser(User user) {
         return userDao.insertUser(user);
+    }
+
+    @Override
+    public int deleteUserByNickname(String nickname) {
+        return userDao.deleteUserByNickname(nickname);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public int updateNickname(String nickname, String newNickname) {
+        return userDao.updateNickname(nickname, newNickname);
     }
 }
