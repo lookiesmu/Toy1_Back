@@ -31,10 +31,16 @@ public class UserServiceImpl implements UserService {
     public UserEntity selectUser(String loginUserId) {
         User user = userDao.selectUserByNickname(loginUserId);
 
-        System.out.println(user);
         if(user == null)
             return null;
 
         return new UserEntity(user.getUserId(), user.getNickname(), user.getPassword());
+    }
+
+    @Override
+    public Boolean isValidNickName(String nickname) {
+        User user = userDao.selectUserByNickname(nickname);
+
+        return (user == null) ? true : false;
     }
 }
