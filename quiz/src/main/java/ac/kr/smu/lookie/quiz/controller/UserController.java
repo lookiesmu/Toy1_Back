@@ -1,12 +1,15 @@
 package ac.kr.smu.lookie.quiz.controller;
 
+import ac.kr.smu.lookie.quiz.dto.Score;
 import ac.kr.smu.lookie.quiz.dto.user.User;
+import ac.kr.smu.lookie.quiz.service.score.ScoreService;
 import ac.kr.smu.lookie.quiz.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -14,6 +17,9 @@ import java.util.Map;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    ScoreService scoreService;
 
     @GetMapping
     public Map<String, Boolean> isValidNickName(@RequestParam(name = "nickname") String nickname){
@@ -77,6 +83,16 @@ public class UserController {
             resultMap.put("success", true);
         }
 
+        return resultMap;
+    }
+
+    @GetMapping("/rank")
+    public Map<String, Object> getRankByExaminer(@RequestParam(name="examiner") String examiner){
+        Map<String, Object>  resultMap = new HashMap<>();
+
+        List<Score> ranking = scoreService.selectScoreByExaminer(examiner);
+
+        resultMap.put("ranking", ranking);
         return resultMap;
     }
 }
