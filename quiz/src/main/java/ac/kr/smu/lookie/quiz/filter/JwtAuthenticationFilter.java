@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // Create login Token
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(  // UsernamePasswordAuthenticationToken을 생성
                                                                                                             // UsernamePasswordAuthenticationToken은 사용자에게 전달하는 JWT Token이 아닌 Spring이 Authentication logic에 사용할 Token.
-                credentials.getUsername(),
+                credentials.getNickname(),
                 credentials.getPassword(),
                 new ArrayList<>()
         );

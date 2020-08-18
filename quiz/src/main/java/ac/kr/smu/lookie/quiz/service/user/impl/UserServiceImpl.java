@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 // MemberService 인터페이스를 구현한다는 것은 UserDbService 역시 구현해야 한다는 것을 의미한다.
 // 데이터베이스에서 읽어들이는 코드와 스프링 시큐리티에서 사용되는 코드를 분리
 @Service
-@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
     // 생성자에 의 해 주입되는 객체이고, 해당 객체를 초기화할 이후에 없기 때문에 final로 선언하였다.
     // final로 선언하고 초기화를 안한 필드는 생성자에서 초기화를 해준다.
@@ -28,6 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserEntity selectUser(String loginUserId) {
         User user = userDao.selectUserByNickname(loginUserId);
 
@@ -38,9 +38,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public Boolean isValidNickName(String nickname) {
         User user = userDao.selectUserByNickname(nickname);
 
         return (user == null) ? true : false;
+    }
+
+    @Override
+    public int insertUser(User user) {
+        return userDao.insertUser(user);
     }
 }
