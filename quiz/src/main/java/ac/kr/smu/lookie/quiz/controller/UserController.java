@@ -10,11 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping
     public Map<String, Boolean> isValidNickName(@RequestParam(name = "nickname") String nickname){
         Map<String, Boolean> resultMap = new HashMap<>();
         boolean isValid = userService.isValidNickName(nickname);    // nickname 중복 검사
@@ -23,7 +24,7 @@ public class UserController {
         return resultMap;
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public Map<String, Boolean> signUp(@RequestBody User user){
         Map<String, Boolean> resultMap = new HashMap<>();
         String nickname = user.getNickname();
@@ -46,6 +47,34 @@ public class UserController {
             }
         }else{  // 아이디가 중복되는 경우
             resultMap.put("success", false);
+        }
+
+        return resultMap;
+    }
+
+    @PatchMapping
+    public Map<String, Boolean> updateNickname(@RequestParam(name = "nickname") String nickname, @RequestParam(name = "newNickname") String newNickname){
+        Map<String, Boolean> resultMap = new HashMap<>();
+        int updateCount = userService.updateNickname(nickname, newNickname);
+
+        if(updateCount == 0){
+            resultMap.put("success", false);
+        }else{
+            resultMap.put("success", true);
+        }
+
+        return resultMap;
+    }
+
+    @DeleteMapping
+    public Map<String, Boolean> deleteUser(@RequestParam(name = "nickname") String nickname){
+        Map<String, Boolean> resultMap = new HashMap<>();
+        int deleteCount = userService.deleteUserByNickname(nickname);
+
+        if(deleteCount == 0){
+            resultMap.put("success", false);
+        }else{
+            resultMap.put("success", true);
         }
 
         return resultMap;
