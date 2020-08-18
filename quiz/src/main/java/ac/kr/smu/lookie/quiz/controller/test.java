@@ -1,11 +1,11 @@
 package ac.kr.smu.lookie.quiz.controller;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class test {
     @GetMapping("/")
-    public void test(){
-
+    public String test(){
+        return "test";
     }
 }
