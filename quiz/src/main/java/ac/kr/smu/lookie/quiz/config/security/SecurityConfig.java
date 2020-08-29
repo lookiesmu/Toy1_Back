@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager())) // jwt filters 추가
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/users").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest().authenticated();
     }
