@@ -43,4 +43,10 @@ public class QuizDao {
         params.put("answer",answer);
         return jdbc.update(QuizSqls.POST_QUIZ, params);
     }
+
+    public int deleteQuiz(int user_id){
+        Map<String, Integer> params = new HashMap<>();
+        params.put("user_id",user_id);
+        return jdbc.update(QuizSqls.DELETE_QUIZ, params);
+    }
 }

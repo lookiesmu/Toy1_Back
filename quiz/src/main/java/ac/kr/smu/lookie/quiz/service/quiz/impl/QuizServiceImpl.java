@@ -27,4 +27,9 @@ public class QuizServiceImpl implements QuizService {
     public int postQuiz(int quiz_id, int user_id, int answer){
         return quizDao.postQuiz(quiz_id,user_id,answer);
     }
+
+    @Override
+    public int deleteQuiz(int user_id){
+        return quizDao.deleteQuiz(user_id);
+    }
 }
