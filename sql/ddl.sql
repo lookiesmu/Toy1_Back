@@ -5,7 +5,7 @@ CREATE TABLE `user` (
 	`user_id` INT NOT NULL AUTO_INCREMENT COMMENT 'user id',
 	`nickname` VARCHAR(50) NOT NULL COMMENT 'nickname',
 	`password` VARCHAR(255) NOT NULL COMMENT '암호회된 password',
-	`quiz_create` INT NOT NULL COMMENT '퀴즈 생성 여부',
+	`quiz_create` INT NOT NULL DEFAULT 0 COMMENT '퀴즈 생성 여부',
 	PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
