@@ -6,4 +6,7 @@ public class ScoreSqls {
                                                                                            "JOIN user answerer ON answerer.user_id = score.answerer " +
                                                                        "WHERE examiner.nickname = :nickname " +
                                                                        "ORDER BY score.score DESC";
+
+    public static final String POST_SCORE = "INSERT INTO score(examiner, answerer, score) " +
+            "VALUES(:examiner, :answerer, :score)";
 }

@@ -26,4 +26,12 @@ public class ScoreDao {
         param.put("nickname", examiner);
         return jdbc.query(ScoreSqls.SELECT_ALL_ANSWERER_SCORE_BY_EXAMINER, param, scoreRowMapper);
     }
+
+    public int postScore(int examiner, int answerer, int score){
+        Map<String, Integer> params = new HashMap<>();
+        params.put("examiner",examiner);
+        params.put("answerer",answerer);
+        params.put("score",score);
+        return jdbc.update(ScoreSqls.POST_SCORE, params);
+    }
 }

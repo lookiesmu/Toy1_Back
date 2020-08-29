@@ -19,4 +19,9 @@ public class ScoreServiceImpl implements ScoreService {
     public List<Score> selectScoreByExaminer(String examiner) {
         return scoreDao.selectScoreByExaminer(examiner);
     }
+
+    @Override
+    public int postScore(int examiner, int answerer, int score){
+        return scoreDao.postScore(examiner, answerer, score);
+    }
 }
